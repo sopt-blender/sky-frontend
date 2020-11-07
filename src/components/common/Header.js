@@ -39,17 +39,15 @@ const LoginElem = styled(Link)`
 `;
 
 export default withRouter(({ location: { pathname } }) => (
-  <>
-    <Header>
-      <TabContainer>
-        <TabElem current={pathname === ("/list/" || "/list")}>All</TabElem>
-        <TabElem current={pathname.includes("/my-sky")}>My Sky</TabElem>
-        <TabElem current={pathname.includes("/liked-sky")}>Liked Sky</TabElem>
-      </TabContainer>
-      <LoginContainer>
-        <LoginElem>Login</LoginElem>
-        <LoginElem>Admin</LoginElem>
-      </LoginContainer>
-    </Header>
-  </>
+  <Header>
+    <TabContainer>
+      <TabElem current={pathname === ("/list/" || "/list")}>All</TabElem>
+      <TabElem current={pathname.includes("/my-sky")}>My Sky</TabElem>
+      <TabElem current={pathname.includes("/liked-sky")}>Liked Sky</TabElem>
+    </TabContainer>
+    <LoginContainer>
+      <LoginElem>Login</LoginElem>
+      <LoginElem>Admin</LoginElem>
+    </LoginContainer>
+  </Header>
 ));
