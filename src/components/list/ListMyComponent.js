@@ -5,6 +5,7 @@ const Container = styled.div`
   padding: 0 14rem;
   display: flex;
   height: 45.5rem;
+  margin-bottom: 8.4rem;
 `;
 
 const Image = styled.img`
