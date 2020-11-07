@@ -1,29 +1,42 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Header = styled.div`
+const Header = styled.header`
   display: flex;
-  justify-content: space-around;
+  padding: 20rem 14rem 10rem 14rem;
+  justify-content: space-between;
+  font-family: "SpoqaHanSans";
 `;
 
-const TabContainer = styled.div`
+const TabContainer = styled(Link)`
+  width: 25%;
   display: flex;
   justify-content: space-between;
 `;
 
 const TabElem = styled.div`
-  border: 1px solid black;
-  background-color: ${(props) => (props.current ? "red" : "white")};
+  font-size: 3rem;
+  font-weight: bold;
+  color: ${(props) =>
+    props.current
+      ? "#000000"
+      : "#d8d8d8"}; // 컬러 값을 raw말고 이름으로 불러올 수 있게 나중에 수정 필요
 `;
 
 const LoginContainer = styled.div`
+  width: 15%;
   display: flex;
+  justify-content: end;
 `;
 
-const LoginButton = styled.button``;
-
-const AdminLoginButton = styled.button``;
+const LoginElem = styled(Link)`
+  font-family: inherit;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-right: 8rem;
+  color: #d8d8d8; // 컬러 값을 raw말고 이름으로 불러올 수 있게 나중에 수정 필요
+`;
 
 export default withRouter(({ location: { pathname } }) => (
   <>
@@ -34,8 +47,8 @@ export default withRouter(({ location: { pathname } }) => (
         <TabElem current={pathname.includes("/liked-sky")}>Liked Sky</TabElem>
       </TabContainer>
       <LoginContainer>
-        <LoginButton>Login</LoginButton>
-        <AdminLoginButton>Admin</AdminLoginButton>
+        <LoginElem>Login</LoginElem>
+        <LoginElem>Admin</LoginElem>
       </LoginContainer>
     </Header>
   </>
