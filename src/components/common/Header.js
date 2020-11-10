@@ -12,14 +12,18 @@ const activeStyle = {
 
 const Header = styled.header`
   width: 100%;
+  min-width: 65rem;
   padding: 6rem 11rem;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+  justify-content: space-evenly;
   font-family: "AppleSDGothicNeo";
+  align-content: stretch;
 `;
 
 const TabContainer = styled.div`
-  width: 25%;
+  /* width: 25%; */
+  /* margin: 0 auto; */
   display: flex;
   justify-content: space-between;
 `;
@@ -28,16 +32,17 @@ const TabElem = styled(NavLink)`
   font-size: 1.3rem;
   font-weight: bold;
   padding: 0.9rem 2rem 0.7rem;
-  margin: 0 1rem;
   object-fit: contain;
   color: #a9a9a9;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 `;
 
 const LoginContainer = styled.div`
-  width: 15%;
+  /* width: 15%; */
+  align-self: flex-end;
   display: flex;
   justify-content: end;
+  margin-left: auto;
 `;
 
 const Login = styled(NavLink)`
