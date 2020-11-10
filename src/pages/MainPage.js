@@ -1,7 +1,14 @@
 import React from "react";
+import ButtonLineComponent from "../components/common/ButtonLineComponent";
+import ButtonShadowComponent from "../components/common/ButtonShadowComponent";
 
 const MainPage = () => {
-  return <div>메인 페이지</div>;
+  return (
+    <div>
+      <ButtonLineComponent size="small">버튼</ButtonLineComponent>
+      <ButtonShadowComponent>버튼2</ButtonShadowComponent>
+    </div>
+  );
 };
 
 export default MainPage;
