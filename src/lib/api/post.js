@@ -1,13 +1,16 @@
 import axios from 'axios';
 
-const post = axios.create();
-post.defaults.baseURL = "";
+// const post = axios.create();
+// post.defaults.baseURL = `https://picsum.photos/v2/list?page=2&limit=20`;
 
-// 따로 만들필요 없는지?
-export const getPost = async (postNum) =>{
-    return await post.get("/api/v1/posts").slice(0,postNum);
+export const getPost = async () =>{
+    const data = await axios({
+        method: "get",
+        url:"https://picsum.photos/v2/list?page=2&limit=20"
+    });
+    return data;
 }
 
-export const getPostById = async (postId) =>{
-    return await post.get(`/api/v1/posts/${postId}`);
-}
+// export const getPostById = async (postId) =>{
+//     return await post.get(`/api/v1/posts/${postId}`);
+// }

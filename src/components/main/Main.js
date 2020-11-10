@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation,Autoplay } from "swiper";
+import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
 import styled from "styled-components";
-import {getPost} from "../../modules/post";
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   border: 1px solid #000;
-  // background-image: url("http://placeimg.com/1024/768");
+  // background-image: url("http://placeimg.com/1920/1080");
   background-repeat: no-repeat;
   width: 1024px;
   height: 768px;
@@ -52,32 +50,26 @@ const SBtnWrapper = styled.div`
   justify-content: center;
 `;
 
-SwiperCore.use([Navigation,Autoplay]);
+SwiperCore.use([Navigation, Autoplay]);
 
-function Main() {
-  const [autoplay,setAutoPlay] = useState(true);
-  const dispatch = useDispatch();
-  const onClickSbtn = () =>{
-    setAutoPlay(!autoplay);
-  }
-  const data = useSelector((state) => state.post);
+function Main({posts,onClickSbtn}) {
   const slides = [];
-  const posts = []; // api로 받아올 post
-  posts.map((post, index) => {
-    slides.push(
-      <SwiperSlide key={`slide-${index}`} >
-        <img src={post.image} alt={`slide-${index}`} />
-      </SwiperSlide>
-    );
-  });
 
   useEffect(()=>{
-    dispatch(getPost());
+    posts.map((post, index) => {
+      slides.push(
+        <SwiperSlide key={`slide-${index}`}>
+          <img src={post.download_url} alt={`slide-${index}`} />
+        </SwiperSlide>
+      );
+    });
   },[]);
 
   return (
     <>
-    <Swiper navigation autoplay={autoplay}>{slides}</Swiper>
+      <Swiper navigation autoplay={true}>
+        {slides}
+      </Swiper>
       <MainWrapper>
         <BtnWrapper>
           <Btn>{"<"}</Btn>

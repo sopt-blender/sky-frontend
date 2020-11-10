@@ -11,7 +11,7 @@ const [
 
 export const getPost = createAction(GET_POST);
 
-const getPostSaga =createRequestSaga(GET_POST,postAPI.getPost);
+const getPostSaga = createRequestSaga(GET_POST,postAPI.getPost);
 
 export function* postSaga() {
   yield takeLatest(GET_POST, getPostSaga);
@@ -19,7 +19,7 @@ export function* postSaga() {
 // export const initializeForm = createAction(INITIALIZE_FORM, (form) => form);
 
 const initState = {
-  post: null,
+  posts: null,
   error: null,
 };
 

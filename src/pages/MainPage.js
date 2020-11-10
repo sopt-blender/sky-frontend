@@ -1,6 +1,12 @@
 import React from "react";
+import MainContainer from "../containers/main/MainContainer";
+
 const MainPage = () => {
-  return <div>메인 페이지</div>;
+  return (
+    <>
+      <MainContainer />
+    </>
+    );
 };
 
 export default MainPage;
