@@ -4,14 +4,18 @@ import styled from "styled-components";
 const Container = styled.div`
   padding: 0 14rem;
   display: flex;
-  height: 45.5rem;
   margin-bottom: 8.4rem;
+  min-width: 65rem;
 `;
 
 const Image = styled.img`
-  background-color: red;
+  width: 100%;
+  max-width: 53rem;
+  height: auto;
+
   color: blue;
-  margin-right: 11.6rem;
+  object-fit: cover;
+  margin: 0 auto;
 `;
 
 const Options = styled.div`
@@ -30,12 +34,7 @@ const OptionElem = styled.span`
 const ListMyComponent = () => {
   return (
     <Container>
-      <Image src="http://placekitten.com/810/455" />
-      <Options>
-        <OptionElem>최신 순 정렬</OptionElem>
-        <OptionElem>승인 여부</OptionElem>
-        <OptionElem>좋아요</OptionElem>
-      </Options>
+      <Image src="http://placekitten.com/530/372" />
     </Container>
   );
 };
