@@ -1,27 +1,37 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+const activeStyle = {
+  borderRadius: "50px",
+  boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.1)",
+  backgroundColor: "#ffffff",
+  color: "#000000",
+};
+
 const Header = styled.header`
+  width: 100%;
+  padding: 6rem 11rem;
   display: flex;
-  padding: 20rem 14rem 10rem 14rem;
   justify-content: space-between;
-  font-family: "SpoqaHanSans";
+  font-family: "AppleSDGothicNeo";
 `;
 
-const TabContainer = styled(Link)`
+const TabContainer = styled.div`
   width: 25%;
   display: flex;
   justify-content: space-between;
 `;
 
-const TabElem = styled.div`
-  font-size: 3rem;
+const TabElem = styled(NavLink)`
+  font-size: 1.3rem;
   font-weight: bold;
-  color: ${(props) =>
-    props.current
-      ? "#000000"
-      : "#d8d8d8"}; // 컬러 값을 raw말고 이름으로 불러올 수 있게 나중에 수정 필요
+  padding: 0.9rem 2rem 0.7rem;
+  margin: 0 1rem;
+  object-fit: contain;
+  color: #a9a9a9;
+  white-space: nowrap;
 `;
 
 const LoginContainer = styled.div`
@@ -30,24 +40,34 @@ const LoginContainer = styled.div`
   justify-content: end;
 `;
 
-const LoginElem = styled(Link)`
-  font-family: inherit;
-  font-size: 3rem;
+const Login = styled(NavLink)`
+  padding: 0.9rem 2rem 0.7rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  margin-right: 8rem;
-  color: #d8d8d8; // 컬러 값을 raw말고 이름으로 불러올 수 있게 나중에 수정 필요
+  text-align: left;
+  margin: 0 1rem;
 `;
 
-export default withRouter(({ location: { pathname } }) => (
+const AdminLogin = styled(Link)`
+  padding: 0.9rem 2rem 0.7rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #a9a9a9;
+`;
+
+export default () => (
+  // export default () => (
   <Header>
     <TabContainer>
-      <TabElem current={pathname === ("/list/" || "/list")}>All</TabElem>
-      <TabElem current={pathname.includes("/my-sky")}>My Sky</TabElem>
-      <TabElem current={pathname.includes("/liked-sky")}>Liked Sky</TabElem>
+      <TabElem to="/">다른 사람이 본 하늘</TabElem>
+      <TabElem to="/list/my-sky" activeStyle={activeStyle}>
+        내가 본 하늘
+      </TabElem>
+      <TabElem to="/">다시 보고싶은 하늘</TabElem>
     </TabContainer>
     <LoginContainer>
-      <LoginElem>Login</LoginElem>
-      <LoginElem>Admin</LoginElem>
+      <Login to="/">Login</Login>
+      <AdminLogin to="/">Admin</AdminLogin>
     </LoginContainer>
   </Header>
-));
+);

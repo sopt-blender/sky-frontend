@@ -5,7 +5,8 @@ import Header from "../components/common/Header";
 import ListAllComponent from "../components/list/ListAllComponent";
 import ListMyComponent from "../components/list/ListMyComponent";
 
-export default withRouter(({ location: { pathname } }) => {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default () => {
   return (
     <>
       <Header />
@@ -14,4 +15,4 @@ export default withRouter(({ location: { pathname } }) => {
       <Footer />
     </>
   );
-});
+};
