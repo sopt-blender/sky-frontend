@@ -17,10 +17,10 @@ function MainContainer() {
 
   return (
     <>
-    {posts && (<Main 
+    {posts ? (<Main 
         posts={posts} 
         onClickSbtn={onClickSbtn} 
-      />)}
+      />) : <div>Loading</div>}
     </>
   );
 }

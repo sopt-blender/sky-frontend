@@ -1,7 +1,7 @@
 import styled from "styled-components";
 // import { Button } from "grommet";
 
-const StyledButtonShadow = styled.button`
+export const StyledButtonShadow = styled.button`
   background: #ffffff;
   color: #000000;
   font-weight: bold;
