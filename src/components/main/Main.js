@@ -3,8 +3,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
 import likeIcon from "../../assets/icons/like_active.svg";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {StyledButtonShadow} from "../common/ButtonShadowComponent";
+
+const sizes = {
+  desktop:102.4,
+  tablet:76.8
+}
+
+const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width:${sizes[label]}rem){
+      ${css(...args)}
+    }
+  `;
+
+  return acc;
+}, {});
 
 const Header = styled.div`
   display: flex;
@@ -31,9 +46,10 @@ const Img = styled.img`
 const PrevBtn = styled.button.attrs((props) => ({
   className: "swiper-button-prev",
 }))`
+  position:absolute;
   border: none;
-  width: 10.7rem;
-  height: 10.7rem;
+  width: 7rem;
+  height: 7rem;
   padding: 0;
   font-size: 10.7rem;
   border-radius: 50%;
@@ -42,28 +58,32 @@ const PrevBtn = styled.button.attrs((props) => ({
   margin-left: 11rem;
   color: #000000;
   font-weight: bold;
+  ${media.desktop`margin-left:8rem;`}
+  ${media.tablet`margin-left:5rem;`}
 `;
 
 const NextBtn = styled.button.attrs((props) => ({
   className: "swiper-button-next",
 }))`
+  position:absolute;
   border: none;
-  width: 10.7rem;
-  height: 10.7rem;
+  width: 7rem;
+  height: 7rem;
   padding: 0;
-  font-size: 10.7rem;
   border-radius: 50%;
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   margin-right: 11rem;
   color: #000000;
   font-weight: bold;
+  ${media.desktop`margin-right:8rem;`}
+  ${media.tablet`margin-right:5rem;`}
 `;
 
 const StopBtn = styled(StyledButtonShadow)`
   width: 38.4rem;
   height: 7.5rem;
-  padding 2.4rem 7.2rem;  
+  padding: 2.4rem 7.2rem;  
   font-size: 2.25rem;
   position: absolute;
   bottom: 0rem;
@@ -94,15 +114,19 @@ function Main({posts}) {
         //   swiper.navigation.update();
         // }}
       >
+        
         {posts.map((post,index) =>
-          <SwiperSlide key={`slide-${index}`} style={{width:"192rem",height: "108rem"}}>
-              <Img src={post.download_url} alt={`slide-${index}`} />
-              <Header>                
-                <Desc>경기도 수원시 새벽</Desc>
-                <img src={likeIcon}/>
-              </Header>
+          <SwiperSlide key={`slide-${index}`} style={{width:'192rem', height:'108rem'}}>
+            <Img src={post.download_url} alt={`slide-${index}`} />
+            <Header>                
+              <Desc>경기도 수원시 새벽</Desc>
+              {/* <img src={likeIcon}/> */}
+              <Img src={likeIcon} alt='likeIcon'/>
+            </Header>
           </SwiperSlide>
         )}
+        
+        
         <PrevBtn/>
         <NextBtn/>
         <div style={{display:"flex", justifyContent:"center"}}>
