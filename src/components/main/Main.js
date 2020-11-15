@@ -32,6 +32,8 @@ const Header = styled.div`
   padding-right: 11rem;
   margin-top: 6rem;
   z-index: 2;
+  ${media.desktop`justify-content:space-between;`}
+  ${media.tablet`justify-content:space-around;margin-left:4rem;`}
 `
 
 const Desc = styled.div`
