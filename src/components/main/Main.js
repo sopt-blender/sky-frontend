@@ -1,4 +1,4 @@
-import React, { useRef,useState,useEffect } from "react";
+import React, { useRef,useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -8,7 +8,8 @@ import {StyledButtonShadow} from "../common/ButtonShadowComponent";
 
 const sizes = {
   desktop:102.4,
-  tablet:76.8
+  tablet:76.8,
+  phone: 36,
 }
 
 const media = Object.keys(sizes).reduce((acc, label) => {
@@ -17,7 +18,6 @@ const media = Object.keys(sizes).reduce((acc, label) => {
       ${css(...args)}
     }
   `;
-
   return acc;
 }, {});
 
@@ -32,8 +32,9 @@ const Header = styled.div`
   padding-right: 11rem;
   margin-top: 6rem;
   z-index: 2;
-  ${media.desktop`justify-content:space-between;`}
-  ${media.tablet`justify-content:space-around;margin-left:4rem;`}
+  ${media.desktop`justify-content: space-between;`}
+  ${media.tablet`justify-content: space-around; margin-left: 4rem;`}
+  // ${media.phone`justify-content: center;`}
 `
 
 const Desc = styled.div`
@@ -43,12 +44,14 @@ const Desc = styled.div`
 `;
 
 const Img = styled.img`
+  // ${media.phone`
+  // `}
 `;
 
 const PrevBtn = styled.button.attrs((props) => ({
   className: "swiper-button-prev",
 }))`
-  position:absolute;
+  position: absolute;
   border: none;
   width: 7rem;
   height: 7rem;
@@ -82,6 +85,11 @@ const NextBtn = styled.button.attrs((props) => ({
   ${media.tablet`margin-right:5rem;`}
 `;
 
+const StopBtnWrapper = styled.div`
+  display: flex; 
+  justify-content: center;
+`;
+
 const StopBtn = styled(StyledButtonShadow)`
   width: 38.4rem;
   height: 7.5rem;
@@ -93,58 +101,51 @@ const StopBtn = styled(StyledButtonShadow)`
   z-index: 2;
 `;
 
+const swiperStyle = {
+  width:'192rem', 
+  height:'108rem'
+}
+
 SwiperCore.use([Navigation, Autoplay]);
 
-function Main({posts}) {
-  // const prevRef = useRef(null)
-  // const nextRef = useRef(null)
+function Main({posts, onSlideChange}) {
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
   const [bool,setBool] = useState(true);
 
   return (
     <>
       <Swiper 
         navigation
-        // ={{
-        //   prevEl: prevRef.current ? prevRef.current : undefined,
-        //   nextEl: nextRef.currnet ? nextRef.current : undefined,
-        // }}
+        ={{
+          prevEl: prevRef.current ? prevRef.current : null,
+          nextEl: nextRef.currnet ? nextRef.current : null,
+        }}
+        onInit = {(swiper) =>{
+          swiper.params.navigation.prevEl = prevRef.current;
+          swiper.params.navigation.nextEl = nextRef.current;
+          swiper.navigation.update();
+        }}
+        onSlideChange={(swiper)=> onSlideChange(swiper.activeIndex)}
         autoplay={bool}
-        // onInit = {(swiper) =>{
-        //   swiper.params.navigation.prevEl = prevRef.current;
-        //   swiper.params.navigation.nextEl = nextRef.current;
-        //   // swiper.navigation.init();
-        //   swiper.navigation.update();
-        // }}
       >
-        
         {posts.map((post,index) =>
-          <SwiperSlide key={`slide-${index}`} style={{width:'192rem', height:'108rem'}}>
+          <SwiperSlide key={`slide-${index}`} style={swiperStyle}>
             <Img src={post.download_url} alt={`slide-${index}`} />
             <Header>                
               <Desc>경기도 수원시 새벽</Desc>
-              {/* <img src={likeIcon}/> */}
               <Img src={likeIcon} alt='likeIcon'/>
             </Header>
           </SwiperSlide>
         )}
-        
-        
-        <PrevBtn/>
-        <NextBtn/>
-        <div style={{display:"flex", justifyContent:"center"}}>
+        <PrevBtn ref={prevRef}/>
+        <NextBtn ref={nextRef}/>
+        <StopBtnWrapper>
           <StopBtn onClick={()=> setBool(!bool)}>잠시 멈춰 바라보기</StopBtn>
-        </div>
-        {/* <div ref={prevRef}></div>
-        <div ref={nextRef}></div> */}
+        </StopBtnWrapper>
       </Swiper>
     </>
   );
 }
 
 export default Main;
-/**
- * 전체 flow
- * 시작 시 (useEffect) useDispatch로 post들을 state에 담아놓는다(20개만 잘라서 받는다)
- * useSelector로 받은 post들을 swiper에 넣는다
- * 10개 째 지나갈 때 새로 통신을 요청한다.(해당 변수를 boolean으로 두어서 useEffect의 dependency로 두면 될 것 같음)
- */
