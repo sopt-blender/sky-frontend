@@ -21,8 +21,8 @@ const UploadButton = styled.button`
   background-color: #ffffff;
 `;
 
-export default () => (
+export default ({ onToggleModal }) => (
   <Footer>
-    <UploadButton>+</UploadButton>
+    <UploadButton onClick={onToggleModal}>+</UploadButton>
   </Footer>
 );
