@@ -34,13 +34,14 @@ const TabElem = styled(NavLink)`
   padding: 0.9rem 2rem 0.7rem;
   object-fit: contain;
   color: #a9a9a9;
+  text-decoration: none;
   /* white-space: nowrap; */
 `;
 
 const LoginContainer = styled.div`
   /* width: 15%; */
-  align-self: flex-end;
   display: flex;
+  align-self: flex-end;
   justify-content: end;
   margin-left: auto;
 `;
@@ -51,6 +52,7 @@ const Login = styled(NavLink)`
   font-weight: bold;
   text-align: left;
   margin: 0 1rem;
+  text-decoration: none;
 `;
 
 const AdminLogin = styled(Link)`
@@ -58,13 +60,14 @@ const AdminLogin = styled(Link)`
   font-size: 1.3rem;
   font-weight: bold;
   color: #a9a9a9;
+  text-decoration: none;
 `;
 
 export default () => (
   // export default () => (
   <Header>
     <TabContainer>
-      <TabElem to="/">다른 사람이 본 하늘</TabElem>
+      <TabElem exact to="/list" activeStyle={activeStyle}>다른 사람이 본 하늘</TabElem>
       <TabElem to="/list/my-sky" activeStyle={activeStyle}>
         내가 본 하늘
       </TabElem>
