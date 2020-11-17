@@ -6,6 +6,12 @@ import likeIcon from "../../assets/icons/like_active.svg";
 import styled, {css} from "styled-components";
 import {StyledButtonShadow} from "../common/ButtonShadowComponent";
 
+const merong = (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+
+}
+
 const sizes = {
   desktop:102.4,
   tablet:76.8,
@@ -34,7 +40,7 @@ const Header = styled.div`
   z-index: 2;
   ${media.desktop`justify-content: space-between;`}
   ${media.tablet`justify-content: space-around; margin-left: 4rem;`}
-  // ${media.phone`justify-content: center;`}
+  ${media.phone`justify-content: center;`}
 `
 
 const Desc = styled.div`
@@ -65,6 +71,10 @@ const PrevBtn = styled.button.attrs((props) => ({
   font-weight: bold;
   ${media.desktop`margin-left:8rem;`}
   ${media.tablet`margin-left:5rem;`}
+  &:focus{
+    outline:none;
+    box-shadow:none;
+  }
 `;
 
 const NextBtn = styled.button.attrs((props) => ({
@@ -83,6 +93,10 @@ const NextBtn = styled.button.attrs((props) => ({
   font-weight: bold;
   ${media.desktop`margin-right:8rem;`}
   ${media.tablet`margin-right:5rem;`}
+  &:focus{
+    outline:none;
+    box-shadow:none;
+  }
 `;
 
 const StopBtnWrapper = styled.div`
@@ -99,6 +113,10 @@ const StopBtn = styled(StyledButtonShadow)`
   bottom: 0rem;
   margin-bottom: 11rem;
   z-index: 2;
+  &:focus{
+    outline:none;
+    box-shadow:none;
+  }
 `;
 
 const swiperStyle = {
@@ -138,7 +156,7 @@ function Main({posts, onSlideChange}) {
             </Header>
           </SwiperSlide>
         )}
-        <PrevBtn ref={prevRef}/>
+        <PrevBtn ref={prevRef} onMouseDown={merong}/>
         <NextBtn ref={nextRef}/>
         <StopBtnWrapper>
           <StopBtn onClick={()=> setBool(!bool)}>잠시 멈춰 바라보기</StopBtn>
