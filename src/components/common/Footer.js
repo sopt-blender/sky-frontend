@@ -3,16 +3,19 @@ import React from "react";
 import styled from "styled-components";
 
 const Footer = styled.footer`
-  `;
+  position:relative;
+`;
 
 const UploadButton = styled.button`
+  z-index:5;
+  position: fixed;
   border: none;
   width: 5rem;
   height: 5rem;
   padding: 0;
   float: right;
-  margin-right: 13rem;
-  margin-bottom: 9rem;
+  right: 13rem;
+  top: 47.6rem;
   font-size: 5rem;
   border-radius: 50%;
   display: inline-flex;
