@@ -59,6 +59,15 @@ const Img = styled.img`
    `}
 `;
 
+const SlideImg = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${(props) => `${props.imageUrl}`});
+  background-repeat:none;
+  background-position:center;
+  background-size:cover;
+`
+
 const NavBtnWrapper = styled.div`
   display: flex;
   justify-content: space-around;
@@ -145,8 +154,8 @@ const StopBtn = styled(StyledButtonShadow)`
 `;
 
 const swiperStyle = {
-  width:'192rem', 
-  height:'108rem'
+  width:'100%', 
+  height:'100vh'
 }
 
 SwiperCore.use([Navigation, Autoplay]);
@@ -186,7 +195,7 @@ function Main({posts, onSlideChange}) {
       >
         {posts.map((post,index) =>
           <SwiperSlide key={`slide-${index}`} style={swiperStyle}>
-            <Img src={post.download_url} alt={`slide-${index}`} />
+            <SlideImg imageUrl={post.download_url} />
             <Header>                
               <Desc>경기도 수원시 새벽</Desc>
               
