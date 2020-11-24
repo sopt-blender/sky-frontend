@@ -4,6 +4,7 @@ import { useState } from 'react';
 import activeBtn from '../../assets/like_active.svg';
 import unactiveBtn from '../../assets/like_unactive.svg';
 import gray from '../../assets/123.PNG';
+import listAPI from '../../lib/listAPI';
 
 const Components = styled.div`
   height: 20.1rem;
@@ -11,21 +12,17 @@ const Components = styled.div`
 `;
 
 const LikeBtn = styled.img`
-`
+`;
 
-const Image = styled.img`
-`
-
-/*
-  const Image = styled.img``;
-  그림 대신 임시로. 나중엔 image에 src로 변경
-*/
+const Image = styled.div`
+`;
 
 const ImageContainer = styled.div`
   height: 17.3rem;
   position:relative;
   margin-bottom:1.2rem;
   ${Image}{
+    //backgroundimage로 주고 center에 넣기
     position: absolute; top:0; left: 0;
     width: 100%;
     height: 100%;
@@ -38,13 +35,13 @@ const ImageContainer = styled.div`
     top:0.3rem;
     right:0.4rem;
     &:hover{
-      pointer:cursor;
+      //pointer:cursor;
     }
     &:focus {
       outline:none;
     }
   }
-`
+`;
 
 const OptionElem = styled.span`
   font-family: inherit;
@@ -63,12 +60,14 @@ const SmallComponent = ({pictureData}) => {
   const [buttonState, setButtonState] = useState(pictureData.like);
 
   const onClickLikeBtn = () => {
-    try {
-      //const result = await postLike();
-      setButtonState(prev => !prev);
-    } catch (e) {
-
-    }
+    (async () => {
+      try {
+        const result = await listAPI.insertLike();
+        setButtonState(prev => !prev);
+      } catch (e) {
+  
+      }
+    })();
   }
   
   return (

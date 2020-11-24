@@ -71,7 +71,7 @@ export default () => (
       <TabElem to="/list/my-sky" activeStyle={activeStyle}>
         내가 본 하늘
       </TabElem>
-      <TabElem to="/">다시 보고싶은 하늘</TabElem>
+      <TabElem to="/list/liked-sky" activeStyle={activeStyle}>다시 보고싶은 하늘</TabElem>
     </TabContainer>
     <LoginContainer>
       <Login to="/">Login</Login>

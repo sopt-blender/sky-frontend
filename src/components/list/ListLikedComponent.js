@@ -17,25 +17,25 @@ const Container = styled.div`
 
 const ListAllComponent = () => {
 
-  const [picturesState, setPicturesState] = useState({
+  const [likedPicturesState, setLikedPicturesState] = useState({
     status : 'idle',
-    pictures : null
+    likedpictures : null
   });
 
   //서버에서 사진 및 좋아요 정보 받아오기
   useEffect(() => {
     (async () => {
-      setPicturesState({ pictures: null, status: 'pending' });
+        setLikedPicturesState({ likedpictures: null, status: 'pending' });
       try {
-          const result = await listAPI.getAllPosts();
-          setTimeout(() => setPicturesState({ pictures : result, status: 'resolved' }), 800);
+          const result = await listAPI.getLikedPosts();
+          setTimeout(() => setLikedPicturesState({ likedpictures : result, status: 'resolved' }), 800);
       } catch (e) {
-        setPicturesState({ pictures: null, status: 'rejected' });
+        setLikedPicturesState({ likedpictures: null, status: 'rejected' });
       }
     })();
   }, []);
 
-  switch (picturesState.status) {
+  switch (likedPicturesState.status) {
     case 'pending':
       return <div></div>;
     case 'rejected':
@@ -43,7 +43,7 @@ const ListAllComponent = () => {
     case 'resolved':
       return (
         <Container>
-          {picturesState.pictures.map((picture) => <SmallComponent pictureData = {picture}/>)}
+          {likedPicturesState.pictures.map((likedpicture) => <SmallComponent pictureData = {likedpicture}/>)}
           <SmallComponent/>
         </Container>
       );
