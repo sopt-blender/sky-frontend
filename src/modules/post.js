@@ -15,15 +15,24 @@ const [
   GET_ADDIT_POST_FAILURE
 ] = createRequestActionTypes("post/GET_ADDIT_POST");
 
+const [
+  UPDATE_POST,
+  UPDATE_POST_SUCCESS,
+  UPDATE_POST_FAILURE
+] = createRequestActionTypes("post/UPDATE_POST");
+
 export const getPost = createAction(GET_POST);
 export const getAddPost = createAction(GET_ADDIT_POST);
+export const updatePost = createAction(UPDATE_POST);
 
 const getPostSaga = createRequestSaga(GET_POST,postAPI.getPost);
 const getAddPostSaga = createRequestSaga(GET_ADDIT_POST,postAPI.getAddPost);
+const updatePostSaga = createRequestSaga(UPDATE_POST,postAPI.updatePost);
 
 export function* postSaga() {
   yield takeLatest(GET_POST, getPostSaga);
   yield takeLatest(GET_ADDIT_POST, getAddPostSaga);
+  yield takeLatest(UPDATE_POST, updatePostSaga);
 }
 
 const initState = {
@@ -49,6 +58,13 @@ const post = handleActions(
       ...state,
       error,
     }),
+    // [UPDATE_POST_SUCCESS]:(state, { payload: posts }) =>({
+    //   ...state,
+    //   posts
+    // }),
+    // [UPDATE_POST_FAILURE]:(state,{ payload: error }) => ({
+
+    // })
   },
   initState
 );

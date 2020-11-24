@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
+import { updatePost } from "../../modules/post"; 
+import { useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -164,6 +166,14 @@ function Main({posts, autoPlay, toggleSbtn, like, toggleLike, onSlideChange}) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(); // swiper DOM에 접근하여 swiper 객체에 접근하기 위함(swiper.autoplay.start() 호출 위함)
+  const dispatch = useDispatch();
+
+  // const [like,setLike] = useState(posts.like);
+  // const likeToggle = (postId) => {
+  //   setLike(!like);
+  //   dispatch(updatePost(postId));
+  // }
+
   useEffect(()=>{
     if(autoPlay){
       swiperRef.current.swiper.autoplay.start();
@@ -193,10 +203,11 @@ function Main({posts, autoPlay, toggleSbtn, like, toggleLike, onSlideChange}) {
       >
         {posts.map((post,index) =>
           <SwiperSlide key={`slide-${index}`} style={swiperStyle}>
-            <SlideImg imageUrl={post.download_url} />
+            <SlideImg imageUrl={post.image}/>
             <Header>                
-              <Desc>경기도 수원시 새벽</Desc>
+              <Desc>{post.location} {post.time}</Desc>
               <Img src={like?likeIcon:unlikeIcon} alt='likeIcon' onClick={toggleLike}/>
+              {/* <Img src={like?likeIcon:unlikeIcon} alt='likeIcon' onClick={()=>likeToggle(post.postId)}/> */}
             </Header>
           </SwiperSlide>
         )}
