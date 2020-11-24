@@ -35,7 +35,7 @@ const Header = styled.div`
   margin-top: 6rem;
   z-index: 2;
   ${media.desktop`justify-content: space-between;`}
-  ${media.tablet`justify-content: space-around; margin-left: 4rem;`}
+  ${media.tablet`justify-content: center; padding:0; margin-left: 0;`}
   ${media.phone`
     justify-content: center;
     padding: 0;
@@ -50,6 +50,10 @@ const Desc = styled.div`
 `;
 
 const Img = styled.img`
+   ${media.tablet`
+      position: absolute;
+      right: 56px;
+   `}
    ${media.phone`
       position: absolute;
       right: 8px;
