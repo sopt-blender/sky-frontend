@@ -1,4 +1,4 @@
-import React, { useRef,useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -78,8 +78,8 @@ const PrevBtn = styled.button.attrs((props) => ({
 }))`
   position: absolute;
   border: none;
-  width: 5rem;
-  height: 5rem;
+  width: 7rem;
+  height: 7rem;
   padding: 0;
   color: #000000;
   background-color: #ffffff;
@@ -104,8 +104,8 @@ const NextBtn = styled.button.attrs((props) => ({
 }))`
   position: absolute;
   border: none;
-  width: 5rem;
-  height: 5rem;
+  width: 7rem;
+  height: 7rem;
   padding: 0;
   color: #000000;
   background-color: #ffffff;
@@ -160,14 +160,10 @@ const swiperStyle = {
 
 SwiperCore.use([Navigation, Autoplay]);
 
-function Main({posts, onSlideChange}) {
+function Main({posts, autoPlay, toggleSbtn, like, toggleLike, onSlideChange}) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(); // swiper DOM에 접근하여 swiper 객체에 접근하기 위함(swiper.autoplay.start() 호출 위함)
-  const [autoPlay,setAutoPlay] = useState(true);
-  const [like, setLike] = useState(false);
-  const toggleLike = () => setLike(!like);
-
   useEffect(()=>{
     if(autoPlay){
       swiperRef.current.swiper.autoplay.start();
@@ -175,7 +171,6 @@ function Main({posts, onSlideChange}) {
       swiperRef.current.swiper.autoplay.stop();
     }
   },[autoPlay]);
-
 
   return (
     <>
@@ -190,7 +185,10 @@ function Main({posts, onSlideChange}) {
           swiper.navigation.update();
         }}
         onSlideChange={(swiper)=> onSlideChange(swiper.activeIndex)}
-        autoplay={autoPlay}
+        autoplay={{
+          autoplay: true,
+          delay: 2000,
+        }}
         ref={swiperRef}
       >
         {posts.map((post,index) =>
@@ -198,7 +196,6 @@ function Main({posts, onSlideChange}) {
             <SlideImg imageUrl={post.download_url} />
             <Header>                
               <Desc>경기도 수원시 새벽</Desc>
-              
               <Img src={like?likeIcon:unlikeIcon} alt='likeIcon' onClick={toggleLike}/>
             </Header>
           </SwiperSlide>
@@ -212,7 +209,7 @@ function Main({posts, onSlideChange}) {
           </NextBtn>
         </NavBtnWrapper>
         <StopBtnWrapper>
-          <StopBtn onClick={()=>setAutoPlay(!autoPlay)}>잠시 멈춰 바라보기</StopBtn>
+          <StopBtn onClick={toggleSbtn}>잠시 멈춰 바라보기</StopBtn>
         </StopBtnWrapper>
       </Swiper>
     </>
