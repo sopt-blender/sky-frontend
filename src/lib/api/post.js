@@ -19,6 +19,7 @@ export const getAddPost = async (postNum) =>{
     return data;
 }
 
+// 아직 로그인 api 나오지 않아서 보류
 export const updatePost = async (postId) => {
     const data = await axios({
         method: "post",
