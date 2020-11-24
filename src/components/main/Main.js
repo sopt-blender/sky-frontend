@@ -14,8 +14,6 @@ const sizes = {
   phone: 36,
 };
 
-const imagePath = {likeIcon, unlikeIcon};
-
 const media = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
     @media (max-width:${sizes[label]}rem){
@@ -144,7 +142,8 @@ function Main({posts, onSlideChange}) {
   const nextRef = useRef(null);
   const swiperRef = useRef(); // swiper DOM에 접근하여 swiper 객체에 접근하기 위함(swiper.autoplay.start() 호출 위함)
   const [autoPlay,setAutoPlay] = useState(true);
-  const [selected, setSelected] = useState(imagePath.unlikeIcon);
+  const [like, setLike] = useState(false);
+  const toggleLike = () => setLike(!like);
 
   useEffect(()=>{
     if(autoPlay){
@@ -177,7 +176,7 @@ function Main({posts, onSlideChange}) {
             <Header>                
               <Desc>경기도 수원시 새벽</Desc>
               
-              <Img src={selected} alt='likeIcon' onClick={()=>setSelected(imagePath.likeIcon)}/>
+              <Img src={like?likeIcon:unlikeIcon} alt='likeIcon' onClick={toggleLike}/>
             </Header>
           </SwiperSlide>
         )}
