@@ -149,7 +149,7 @@ const StopBtn = styled(StyledButtonShadow)`
     width: 25.6rem;
     height: 5rem;
     font-size: 1.5rem;
-    padding: 1.6rem 7.2rem;
+    padding: 1.6rem ;
   `}
 `;
 
