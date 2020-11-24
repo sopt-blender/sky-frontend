@@ -5,7 +5,6 @@ import "swiper/swiper-bundle.css";
 import styled, {css} from "styled-components";
 import {StyledButtonShadow} from "../common/ButtonShadowComponent";
 import likeIcon from "../../assets/icons/like_active.svg";
-import btnRight from "../../assets/icons/btn_right.svg";
 
 const sizes = {
   desktop:102.4,
@@ -55,6 +54,11 @@ const Img = styled.img`
    `}
 `;
 
+const NavBtnWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
 const PrevBtn = styled.button.attrs((props) => ({
   className: "swiper-button-prev",
 }))`
@@ -63,58 +67,57 @@ const PrevBtn = styled.button.attrs((props) => ({
   width: 5rem;
   height: 5rem;
   padding: 0;
-  font-size: 10.7rem;
-  border-radius: 50%;
-  box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  margin-left: 11rem;
   color: #000000;
-  font-weight: bold;
-  ${media.desktop`margin-left:8rem;`}
+  background-color: #ffffff;
+  box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  margin-left: 11rem;
+  font-size: 3rem;
+  /* ${media.desktop`margin-left:8rem;`} */
   ${media.tablet`margin-left:5rem;`}
+  ${media.phone`margin-left: 2rem;`}
   &:focus{
     outline:none;
     box-shadow:none;
   }
-  ${media.phone`
-    width: 5rem;
-    height: 5rem;
-  `}
+  &:after{
+    content: "";
+  }
 `;
 
 const NextBtn = styled.button.attrs((props) => ({
   className: "swiper-button-next",
 }))`
-  position:absolute;
+  position: absolute;
   border: none;
   width: 5rem;
   height: 5rem;
   padding: 0;
-  border-radius: 50%;
+  color: #000000;
+  background-color: #ffffff;
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
-  /* background-color: #ffffff; */
+  border-radius: 50%;
   margin-right: 11rem;
-  /* color: #000000; */
-  /* font-weight: bold; */
-  background-image: url(${btnRight});
-  background-repeat: no-repeat; 
-  ${media.desktop`margin-right:8rem;`}
+  font-size: 3rem;
+  /* ${media.desktop`margin-right:8rem;`} */
   ${media.tablet`margin-right:5rem;`}
+  ${media.phone`margin-right: 2rem;`}
   &:focus{
     outline:none;
     box-shadow:none;
   }
-  ${media.phone``}
+  &:after{
+    content: "";
+  }
 `;
 
 const StopBtnWrapper = styled.div`
   display: flex; 
   justify-content: center;
+  align-items: center;
 `;
 
-const StopBtn = styled(StyledButtonShadow).attrs((props)=>({
-  className: "swiper-container"
-}))`
+const StopBtn = styled(StyledButtonShadow)`
   width: 38.4rem;
   height: 7.5rem;
   padding: 2.4rem 7.2rem;  
@@ -127,6 +130,13 @@ const StopBtn = styled(StyledButtonShadow).attrs((props)=>({
     outline:none;
     box-shadow:none;
   }
+  ${media.phone`
+    margin-bottom: 10.5rem;
+    width: 25.6rem;
+    height: 5rem;
+    font-size: 1.5rem;
+    padding: 1.6rem 7.2rem;
+  `}
 `;
 
 const swiperStyle = {
@@ -175,8 +185,14 @@ function Main({posts, onSlideChange}) {
             </Header>
           </SwiperSlide>
         )}
-        <PrevBtn ref={prevRef}/>
-        <NextBtn ref={nextRef}/>
+        <NavBtnWrapper>
+          <PrevBtn ref={prevRef}>
+              <i class="fas fa-chevron-left"></i>
+          </PrevBtn>
+          <NextBtn ref={nextRef}>
+            <i class="fas fa-chevron-right"></i>
+          </NextBtn>
+        </NavBtnWrapper>
         <StopBtnWrapper>
           <StopBtn onClick={()=>setAutoPlay(!autoPlay)}>잠시 멈춰 바라보기</StopBtn>
         </StopBtnWrapper>
