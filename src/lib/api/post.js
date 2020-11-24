@@ -5,10 +5,7 @@ export const getPost = async (postNum) =>{
         method: "get",
         // url:'http://www.comedu.org:3000/mobile' // for mobile 360*640
         url:'http://www.comedu.org:3000/desktop' // for desktop 1076*572
-        // url:`https://picsum.photos/v2/list?page=2&limit=${postNum}`
     });
-    // let data = [];
-    // for(let i=0;i<20;i++) data.push({'download_url':'../../assets/1024_576.jpeg'});
     return data;
 }
 
