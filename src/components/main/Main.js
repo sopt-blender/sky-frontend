@@ -5,12 +5,13 @@ import "swiper/swiper-bundle.css";
 import styled, {css} from "styled-components";
 import {StyledButtonShadow} from "../common/ButtonShadowComponent";
 import likeIcon from "../../assets/icons/like_active.svg";
+import unlikeIcon from "../../assets/icons/like_unactive.svg";
 
 const sizes = {
   desktop:102.4,
   tablet:76.8,
   phone: 36,
-}
+};
 
 const media = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
@@ -33,7 +34,7 @@ const Header = styled.div`
   margin-top: 6rem;
   z-index: 2;
   ${media.desktop`justify-content: space-between;`}
-  ${media.tablet`justify-content: space-around; margin-left: 4rem;`}
+  ${media.tablet`justify-content: center; padding:0; margin-left: 0;`}
   ${media.phone`
     justify-content: center;
     padding: 0;
@@ -48,6 +49,10 @@ const Desc = styled.div`
 `;
 
 const Img = styled.img`
+   ${media.tablet`
+      position: absolute;
+      right: 56px;
+   `}
    ${media.phone`
       position: absolute;
       right: 8px;
@@ -151,6 +156,8 @@ function Main({posts, onSlideChange}) {
   const nextRef = useRef(null);
   const swiperRef = useRef(); // swiper DOM에 접근하여 swiper 객체에 접근하기 위함(swiper.autoplay.start() 호출 위함)
   const [autoPlay,setAutoPlay] = useState(true);
+  const [like, setLike] = useState(false);
+  const toggleLike = () => setLike(!like);
 
   useEffect(()=>{
     if(autoPlay){
@@ -159,7 +166,8 @@ function Main({posts, onSlideChange}) {
       swiperRef.current.swiper.autoplay.stop();
     }
   },[autoPlay]);
-  
+
+
   return (
     <>
       <Swiper 
@@ -181,7 +189,8 @@ function Main({posts, onSlideChange}) {
             <Img src={post.download_url} alt={`slide-${index}`} />
             <Header>                
               <Desc>경기도 수원시 새벽</Desc>
-              <Img src={likeIcon} alt='likeIcon'/>
+              
+              <Img src={like?likeIcon:unlikeIcon} alt='likeIcon' onClick={toggleLike}/>
             </Header>
           </SwiperSlide>
         )}
