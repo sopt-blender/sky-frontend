@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { useState } from 'react';
 import activeBtn from '../../assets/like_active.svg';
 import unactiveBtn from '../../assets/like_unactive.svg';
-import gray from '../../assets/123.PNG';
+import img from '../../assets/123.PNG';
 import listAPI from '../../lib/listAPI';
 
 const Components = styled.div`
-  height: 20.1rem;
+  width:100%;
+  height: auto;
   margin-bottom: 4rem;
 `;
 
@@ -18,15 +19,14 @@ const Image = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  height: 17.3rem;
+  width:100%;
+  padding-top:70%;
   position:relative;
   margin-bottom:1.2rem;
-  ${Image}{
-    //backgroundimage로 주고 center에 넣기
-    position: absolute; top:0; left: 0;
-    width: 100%;
-    height: 100%;
-  }
+  background-image: url(${img});
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
   ${LikeBtn}{
     z-index: 3;
     width:5rem;
@@ -50,6 +50,7 @@ const OptionElem = styled.span`
   font-size: 1.2rem;
 `;
 
+
 /*
 좋아요 버튼 눌렀을 때
 https://formytest.s3.ap-northeast-2.amazonaws.com/like_active.svg
@@ -57,22 +58,23 @@ https://formytest.s3.ap-northeast-2.amazonaws.com/like_active.svg
 
 const SmallComponent = ({pictureData}) => {
 
-  const [buttonState, setButtonState] = useState(pictureData.like);
+  //const [buttonState, setButtonState] = useState(pictureData.like);
+  const [buttonState, setButtonState] = useState(false);
 
   const onClickLikeBtn = () => {
     (async () => {
       try {
-        const result = await listAPI.insertLike();
+        //const result = await listAPI.insertLike();
         setButtonState(prev => !prev);
       } catch (e) {
-  
+        
       }
     })();
   }
   
   return (
       <Components>
-        <ImageContainer><Image src = {gray}/><LikeBtn src ={ buttonState === true ? activeBtn : unactiveBtn } onClick={onClickLikeBtn} /></ImageContainer>
+        <ImageContainer><LikeBtn src ={ buttonState === true ? activeBtn : unactiveBtn } onClick={onClickLikeBtn} /></ImageContainer>
         <OptionElem>지역 시간</OptionElem>
       </Components>
   );

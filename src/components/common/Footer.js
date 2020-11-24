@@ -15,7 +15,7 @@ const UploadButton = styled.button`
   padding: 0;
   float: right;
   right: 13rem;
-  top: 47.6rem;
+  bottom: 5rem;
   font-size: 5rem;
   border-radius: 50%;
   display: inline-flex;

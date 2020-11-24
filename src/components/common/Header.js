@@ -19,6 +19,9 @@ const Header = styled.header`
   justify-content: space-evenly;
   font-family: "AppleSDGothicNeo";
   align-content: stretch;
+  @media (max-width: 768px) {
+
+  }
 `;
 
 const TabContainer = styled.div`

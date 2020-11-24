@@ -10,7 +10,6 @@ const Container = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  max-width: 53rem;
   height: auto;
 
   color: blue;

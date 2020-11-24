@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'api/vi/posts';
+const url = '/api/vi/posts';
 
 const getAllPosts = async () => {
     try {
